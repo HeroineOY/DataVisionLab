@@ -7,6 +7,7 @@ import type { EChartsOption } from 'echarts'
 import { computed } from 'vue'
 import type { RegionPoint } from '@/features/dashboard/model/dashboard'
 import EChartView from '@/shared/components/EChartView.vue'
+import { chartInkTheme } from '@/shared/constants/palette'
 
 const props = defineProps<{
   regions: RegionPoint[]
@@ -20,6 +21,9 @@ function readRegionData(data: unknown): RegionSeriesData {
 
 const option = computed<EChartsOption>(() => ({
   tooltip: {
+    backgroundColor: chartInkTheme.tooltipBackground,
+    borderColor: chartInkTheme.tooltipBorder,
+    textStyle: { color: chartInkTheme.text },
     formatter: (params) => {
       const item = Array.isArray(params) ? params[0] : params
       const data = readRegionData(item.data)
@@ -48,14 +52,14 @@ const option = computed<EChartsOption>(() => ({
           const data = readRegionData(params.data)
           return data[3]
         },
-        color: '#f8fbff',
+        color: '#ffffff',
         fontWeight: 700,
       },
       itemStyle: {
-        color: '#2dd4bf',
+        color: '#2f8f8a',
         opacity: 0.72,
-        shadowBlur: 18,
-        shadowColor: '#2dd4bf',
+        shadowBlur: 20,
+        shadowColor: 'rgba(47, 143, 138, 0.46)',
       },
     },
     {
@@ -65,7 +69,7 @@ const option = computed<EChartsOption>(() => ({
       data: props.regions
         .filter((item) => item.value >= 80)
         .map((item) => [item.x, 100 - item.y, item.value, item.name]),
-      itemStyle: { color: '#f59e0b' },
+      itemStyle: { color: '#b98b4a' },
     },
   ],
 }))

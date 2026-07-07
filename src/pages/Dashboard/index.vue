@@ -87,36 +87,66 @@ onBeforeUnmount(() => {
 <style scoped>
 .dashboard-page {
   position: relative;
+  isolation: isolate;
   min-height: 100vh;
   padding: clamp(14px, 1vw, 20px);
   overflow: hidden;
   background:
-    linear-gradient(rgb(96 165 250 / 4%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(96 165 250 / 4%) 1px, transparent 1px),
-    radial-gradient(circle at 18% 12%, rgb(45 212 191 / 18%), transparent 26%),
-    radial-gradient(circle at 78% 8%, rgb(245 158 11 / 12%), transparent 24%),
-    radial-gradient(circle at 50% 92%, rgb(96 165 250 / 10%), transparent 32%),
-    linear-gradient(135deg, #07111f 0%, #0c1728 46%, #111827 100%);
+    radial-gradient(circle at 16% 18%, rgb(47 143 138 / 12%), transparent 24%),
+    radial-gradient(circle at 82% 8%, rgb(93 154 178 / 16%), transparent 24%),
+    radial-gradient(circle at 42% 86%, rgb(83 116 137 / 10%), transparent 34%),
+    linear-gradient(120deg, rgb(255 255 255 / 54%), transparent 38%),
+    linear-gradient(135deg, var(--ink-paper-soft) 0%, var(--ink-paper) 46%, #e5ece7 100%);
   background-size:
-    32px 32px,
-    32px 32px,
+    auto,
     auto,
     auto,
     auto,
     auto;
-  color: #f8fbff;
+  color: var(--ink-text);
 }
 
 .dashboard-page::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgb(255 255 255 / 5%), transparent 18%, rgb(0 0 0 / 16%));
+  z-index: 0;
+  background:
+    linear-gradient(rgb(31 50 64 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(31 50 64 / 2.5%) 1px, transparent 1px),
+    radial-gradient(circle at 8% 18%, rgb(31 50 64 / 10%) 0 1px, transparent 1px),
+    radial-gradient(circle at 68% 32%, rgb(31 50 64 / 8%) 0 1px, transparent 1px);
+  background-size:
+    34px 34px,
+    34px 34px,
+    9px 9px,
+    13px 13px;
+  mix-blend-mode: multiply;
+  opacity: 0.58;
+  content: '';
+}
+
+.dashboard-page::after {
+  position: fixed;
+  right: -4vw;
+  bottom: -6vh;
+  left: -4vw;
+  height: 38vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(165deg, transparent 14%, rgb(37 72 95 / 8%) 14% 22%, transparent 22%),
+    linear-gradient(150deg, transparent 22%, rgb(15 31 43 / 11%) 22% 33%, transparent 33%),
+    linear-gradient(135deg, transparent 30%, rgb(83 116 137 / 9%) 30% 43%, transparent 43%),
+    linear-gradient(180deg, transparent, rgb(255 252 242 / 70%));
+  filter: blur(0.2px);
+  opacity: 0.52;
   content: '';
 }
 
 .dashboard-header {
   position: relative;
+  z-index: 1;
   display: flex;
   min-height: clamp(58px, 6.7vh, 74px);
   align-items: center;
@@ -128,16 +158,18 @@ onBeforeUnmount(() => {
 
 .dashboard-header h1 {
   margin: 6px 0 0;
-  color: #f8fbff;
+  color: var(--ink-dark);
   font-size: clamp(25px, 1.7vw, 34px);
   font-weight: 800;
-  text-shadow: 0 0 28px rgb(45 212 191 / 28%);
+  letter-spacing: 0;
+  text-shadow: 0 10px 32px rgb(37 72 95 / 12%);
 }
 
 .dashboard-header__eyebrow {
   margin: 0;
-  color: #8bd9ff;
+  color: var(--ink-blue-soft);
   font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -146,24 +178,31 @@ onBeforeUnmount(() => {
   min-width: 240px;
   justify-items: end;
   gap: 6px;
-  padding: 10px 14px;
-  border: 1px solid rgb(141 220 255 / 18%);
+  padding: 10px 16px;
+  border: 1px solid var(--ink-line);
   border-radius: 8px;
-  background: rgb(9 19 34 / 58%);
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 72%), rgb(235 242 238 / 56%)),
+    var(--ink-card);
+  box-shadow: var(--ink-shadow-soft);
+  backdrop-filter: blur(18px);
 }
 
 .dashboard-header__status span {
-  color: #a3e635;
+  color: var(--ink-jade);
   font-size: 13px;
+  font-weight: 700;
 }
 
 .dashboard-header__status strong {
-  color: #e7eefc;
+  color: var(--ink-dark);
+  font-family: var(--ink-font-number);
   font-size: 20px;
 }
 
 .dashboard-content {
   position: relative;
+  z-index: 1;
   display: grid;
   height: calc(100vh - clamp(58px, 6.7vh, 74px) - clamp(10px, 1vh, 14px) - clamp(28px, 2vw, 40px));
   grid-template-rows: clamp(84px, 10vh, 108px) minmax(0, 1fr);
@@ -177,6 +216,10 @@ onBeforeUnmount(() => {
   min-height: 0;
 }
 
+.dashboard-metrics > * {
+  animation: inkRise 480ms ease both;
+}
+
 .dashboard-grid {
   display: grid;
   min-height: 0;
@@ -185,6 +228,20 @@ onBeforeUnmount(() => {
     "health bar ranking" minmax(0, 1fr)
     / minmax(300px, 0.92fr) minmax(520px, 1.56fr) minmax(340px, 1.04fr);
   gap: clamp(12px, 1vw, 16px);
+}
+
+.dashboard-grid > * {
+  animation: inkRise 560ms ease both;
+}
+
+.dashboard-grid > :nth-child(2),
+.dashboard-grid > :nth-child(5) {
+  animation-delay: 80ms;
+}
+
+.dashboard-grid > :nth-child(3),
+.dashboard-grid > :nth-child(6) {
+  animation-delay: 140ms;
 }
 
 .dashboard-grid > :nth-child(1) {
@@ -223,10 +280,40 @@ onBeforeUnmount(() => {
   display: grid;
   min-height: 620px;
   place-items: center;
-  border: 1px solid rgb(255 255 255 / 10%);
+  border: 1px solid var(--ink-line);
   border-radius: 8px;
-  background: rgb(9 19 34 / 72%);
-  color: #dbeafe;
+  background: var(--ink-card);
+  color: var(--ink-text-soft);
+  box-shadow: var(--ink-shadow);
+}
+
+.dashboard-loading::before {
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+  border: 2px solid rgb(47 143 138 / 16%);
+  border-top-color: var(--ink-cyan);
+  border-radius: 50%;
+  animation: inkSpin 0.9s linear infinite;
+  content: '';
+}
+
+@keyframes inkSpin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes inkRise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (width <= 1180px) {

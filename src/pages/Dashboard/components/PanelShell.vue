@@ -24,22 +24,36 @@ defineProps<{
   min-height: 0;
   overflow: hidden;
   flex-direction: column;
-  border: 1px solid rgb(125 211 252 / 15%);
-  border-radius: 8px;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--ink-radius);
   background:
-    linear-gradient(135deg, rgb(125 211 252 / 10%), transparent 22%),
-    linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%)),
-    rgb(9 19 34 / 84%);
+    radial-gradient(circle at 12% 0%, rgb(47 143 138 / 8%), transparent 28%),
+    linear-gradient(145deg, rgb(255 255 255 / 94%), rgb(241 246 242 / 82%)),
+    var(--ink-card-solid);
   box-shadow:
-    0 20px 42px rgb(0 0 0 / 25%),
-    inset 0 1px 0 rgb(255 255 255 / 8%);
+    var(--ink-shadow),
+    inset 0 1px 0 rgb(255 255 255 / 68%);
+  backdrop-filter: blur(18px);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.panel-shell:hover {
+  border-color: rgb(47 143 138 / 28%);
+  box-shadow:
+    0 22px 52px rgb(37 72 95 / 15%),
+    inset 0 1px 0 rgb(255 255 255 / 80%);
+  transform: translateY(-1px);
 }
 
 .panel-shell::before {
   position: absolute;
   inset: 0 0 auto;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #2dd4bf, #60a5fa, transparent);
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--ink-cyan), var(--ink-lake), transparent);
+  opacity: 0.58;
   content: '';
 }
 
@@ -49,8 +63,9 @@ defineProps<{
   bottom: 10px;
   width: 44px;
   height: 44px;
-  border-right: 1px solid rgb(125 211 252 / 22%);
-  border-bottom: 1px solid rgb(125 211 252 / 22%);
+  border-right: 1px solid rgb(47 143 138 / 18%);
+  border-bottom: 1px solid rgb(47 143 138 / 18%);
+  opacity: 0.8;
   content: '';
 }
 
@@ -61,21 +76,22 @@ defineProps<{
   align-items: center;
   justify-content: space-between;
   padding: 0 18px;
-  border-bottom: 1px solid rgb(255 255 255 / 8%);
-  background: linear-gradient(90deg, rgb(96 165 250 / 10%), transparent);
+  border-bottom: 1px solid rgb(31 50 64 / 8%);
+  background: linear-gradient(90deg, rgb(47 143 138 / 8%), transparent);
 }
 
 .panel-shell__header h2 {
   margin: 0;
-  color: #eaf2ff;
+  color: var(--ink-dark);
   font-size: 16px;
   font-weight: 700;
-  text-shadow: 0 0 16px rgb(96 165 250 / 24%);
+  letter-spacing: 0;
 }
 
 .panel-shell__header span {
-  color: #8bd9ff;
+  color: var(--ink-blue-soft);
   font-size: 12px;
+  font-weight: 700;
 }
 
 .panel-shell__body {

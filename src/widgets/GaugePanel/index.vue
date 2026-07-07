@@ -20,12 +20,12 @@ const option = computed<EChartsOption>(() => ({
       progress: {
         show: true,
         width: 14,
-        itemStyle: { color: '#2dd4bf' },
+        itemStyle: { color: '#2f8f8a' },
       },
       axisLine: {
         lineStyle: {
           width: 14,
-          color: [[1, 'rgba(148, 163, 184, 0.16)']],
+          color: [[1, 'rgba(31, 50, 64, 0.12)']],
         },
       },
       axisTick: { show: false },
@@ -35,8 +35,9 @@ const option = computed<EChartsOption>(() => ({
       detail: {
         valueAnimation: true,
         formatter: '{value}分',
-        color: '#f8fbff',
+        color: '#0f1f2b',
         fontSize: 26,
+        fontFamily: 'Roboto Mono, Consolas, monospace',
         offsetCenter: [0, '8%'],
       },
       data: [{ value: props.score }],

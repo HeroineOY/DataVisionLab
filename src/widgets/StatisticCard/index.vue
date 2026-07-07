@@ -37,14 +37,26 @@ const displayValue = computed(() => {
   justify-content: space-between;
   overflow: hidden;
   padding: clamp(14px, 1vw, 18px);
-  border: 1px solid rgb(125 211 252 / 14%);
-  border-radius: 8px;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--ink-radius);
   background:
-    linear-gradient(145deg, rgb(255 255 255 / 11%), rgb(255 255 255 / 3%)),
-    rgb(12 24 42 / 82%);
+    radial-gradient(circle at 88% 0%, rgb(93 154 178 / 14%), transparent 30%),
+    linear-gradient(145deg, rgb(255 255 255 / 96%), rgb(237 230 216 / 68%)),
+    var(--ink-card-solid);
   box-shadow:
-    0 16px 34px rgb(0 0 0 / 20%),
-    inset 0 1px 0 rgb(255 255 255 / 8%);
+    var(--ink-shadow-soft),
+    inset 0 1px 0 rgb(255 255 255 / 78%);
+  backdrop-filter: blur(14px);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.metric-card:hover {
+  border-color: rgb(47 143 138 / 28%);
+  box-shadow: 0 16px 36px rgb(47 72 82 / 14%);
+  transform: translateY(-2px);
 }
 
 .metric-card::before {
@@ -61,34 +73,36 @@ const displayValue = computed(() => {
   width: 74px;
   height: 74px;
   border-radius: 50%;
-  background: rgb(125 211 252 / 10%);
+  background: rgb(47 143 138 / 9%);
   content: '';
 }
 
 .metric-card--cyan::before {
-  background: #2dd4bf;
+  background: var(--ink-cyan-bright);
 }
 
 .metric-card--blue::before {
-  background: #60a5fa;
+  background: var(--ink-lake);
 }
 
 .metric-card--amber::before {
-  background: #f59e0b;
+  background: var(--ink-ochre);
 }
 
 .metric-card--rose::before {
-  background: #f472b6;
+  background: var(--ink-cinnabar);
 }
 
 .metric-card__label {
   margin: 0 0 clamp(8px, 0.7vh, 11px);
-  color: #a9bad6;
+  color: var(--ink-text-soft);
   font-size: 14px;
+  font-weight: 600;
 }
 
 .metric-card__value {
-  color: #f8fbff;
+  color: var(--ink-dark);
+  font-family: var(--ink-font-number);
   font-size: clamp(24px, 1.55vw, 31px);
   font-weight: 700;
   line-height: 1;
@@ -100,7 +114,8 @@ const displayValue = computed(() => {
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
-  color: #c7d2fe;
+  color: var(--ink-blue-soft);
   font-size: 13px;
+  font-weight: 700;
 }
 </style>

@@ -50,22 +50,24 @@ defineProps<{
 .system-status__grid div {
   min-width: 0;
   padding: 10px;
-  border: 1px solid rgb(125 211 252 / 12%);
+  border: 1px solid var(--ink-line);
   border-radius: 8px;
-  background: rgb(255 255 255 / 6%);
+  background: rgb(255 252 242 / 58%);
 }
 
 .system-status__grid span {
   display: block;
   overflow-wrap: anywhere;
-  color: #a9bad6;
+  color: var(--ink-text-soft);
   font-size: 12px;
+  font-weight: 600;
 }
 
 .system-status__grid strong {
   display: block;
   margin-top: 6px;
-  color: #f8fbff;
+  color: var(--ink-dark);
+  font-family: var(--ink-font-number);
   font-size: clamp(18px, 1.15vw, 21px);
   line-height: 1.1;
 }
@@ -87,8 +89,8 @@ defineProps<{
   min-width: 0;
   padding: 9px 10px;
   border-radius: 8px;
-  background: rgb(255 255 255 / 6%);
-  color: #d9e7ff;
+  background: rgb(255 252 242 / 62%);
+  color: var(--ink-dark);
   font-size: 13px;
 }
 
@@ -99,18 +101,19 @@ defineProps<{
 }
 
 .system-status__logs span {
-  color: #91a6c5;
+  color: var(--ink-muted);
+  font-family: var(--ink-font-number);
 }
 
 .system-status__logs .is-warn {
-  border-left: 3px solid #f59e0b;
+  border-left: 3px solid var(--ink-ochre);
 }
 
 .system-status__logs .is-info {
-  border-left: 3px solid #2dd4bf;
+  border-left: 3px solid var(--ink-cyan);
 }
 
 .system-status__logs .is-error {
-  border-left: 3px solid #fb7185;
+  border-left: 3px solid var(--ink-cinnabar);
 }
 </style>

@@ -45,10 +45,11 @@ defineProps<{
   width: 30px;
   height: 30px;
   place-items: center;
-  border: 1px solid rgb(255 255 255 / 16%);
+  border: 1px solid var(--ink-line-strong);
   border-radius: 8px;
-  background: rgb(255 255 255 / 7%);
-  color: #e7eefc;
+  background: linear-gradient(145deg, rgb(255 255 255 / 72%), rgb(237 230 216 / 64%));
+  color: var(--ink-blue);
+  font-family: var(--ink-font-number);
   font-weight: 700;
 }
 
@@ -60,7 +61,7 @@ defineProps<{
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  color: #dbeafe;
+  color: var(--ink-dark);
   font-size: 14px;
 }
 
@@ -71,7 +72,9 @@ defineProps<{
 }
 
 .ranking-board__line span {
-  color: #8bd9ff;
+  color: var(--ink-cyan);
+  font-family: var(--ink-font-number);
+  font-weight: 700;
 }
 
 .ranking-board__track {
@@ -79,13 +82,14 @@ defineProps<{
   margin-top: 8px;
   overflow: hidden;
   border-radius: 99px;
-  background: rgb(148 163 184 / 14%);
+  background: rgb(31 50 64 / 10%);
 }
 
 .ranking-board__track i {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #2dd4bf, #60a5fa);
+  background: linear-gradient(90deg, var(--ink-cyan-bright), var(--ink-lake), var(--ink-blue));
+  box-shadow: 0 0 16px rgb(47 143 138 / 18%);
 }
 </style>

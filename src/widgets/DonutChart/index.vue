@@ -7,7 +7,7 @@ import type { EChartsOption } from 'echarts'
 import { computed } from 'vue'
 import type { CategoryPoint } from '@/features/dashboard/model/dashboard'
 import EChartView from '@/shared/components/EChartView.vue'
-import { chartPalette } from '@/shared/constants/palette'
+import { chartInkTheme, chartPalette } from '@/shared/constants/palette'
 
 const props = defineProps<{
   items: CategoryPoint[]
@@ -15,11 +15,16 @@ const props = defineProps<{
 
 const option = computed<EChartsOption>(() => ({
   color: chartPalette,
-  tooltip: { trigger: 'item' },
+  tooltip: {
+    trigger: 'item',
+    backgroundColor: chartInkTheme.tooltipBackground,
+    borderColor: chartInkTheme.tooltipBorder,
+    textStyle: { color: chartInkTheme.text },
+  },
   legend: {
     bottom: 0,
     left: 'center',
-    textStyle: { color: '#b9c7dc' },
+    textStyle: { color: chartInkTheme.mutedText, fontWeight: 600 },
   },
   series: [
     {
@@ -29,8 +34,12 @@ const option = computed<EChartsOption>(() => ({
       center: ['50%', '43%'],
       avoidLabelOverlap: true,
       label: {
-        color: '#d9e7ff',
+        color: chartInkTheme.text,
         formatter: '{b}\n{d}%',
+      },
+      itemStyle: {
+        borderColor: 'rgba(255, 252, 242, 0.7)',
+        borderWidth: 2,
       },
       data: props.items,
     },

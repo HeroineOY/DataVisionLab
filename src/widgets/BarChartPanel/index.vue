@@ -7,25 +7,32 @@ import type { EChartsOption } from 'echarts'
 import { computed } from 'vue'
 import type { CategoryPoint } from '@/features/dashboard/model/dashboard'
 import EChartView from '@/shared/components/EChartView.vue'
+import { chartInkTheme } from '@/shared/constants/palette'
 
 const props = defineProps<{
   items: CategoryPoint[]
 }>()
 
 const option = computed<EChartsOption>(() => ({
-  color: ['#60a5fa'],
-  tooltip: { trigger: 'axis' },
+  color: ['#5d9ab2'],
+  tooltip: {
+    trigger: 'axis',
+    backgroundColor: chartInkTheme.tooltipBackground,
+    borderColor: chartInkTheme.tooltipBorder,
+    textStyle: { color: chartInkTheme.text },
+  },
   grid: { left: 36, right: 14, top: 18, bottom: 42 },
   xAxis: {
     type: 'category',
     data: props.items.map((item) => item.name),
-    axisLabel: { color: '#a8bbd4', interval: 0 },
-    axisLine: { lineStyle: { color: '#36506f' } },
+    axisLabel: { color: chartInkTheme.mutedText, interval: 0 },
+    axisLine: { lineStyle: { color: chartInkTheme.axisLine } },
+    axisTick: { show: false },
   },
   yAxis: {
     type: 'value',
-    splitLine: { lineStyle: { color: 'rgba(148, 163, 184, 0.14)' } },
-    axisLabel: { color: '#a8bbd4' },
+    splitLine: { lineStyle: { color: chartInkTheme.splitLine } },
+    axisLabel: { color: chartInkTheme.mutedText },
   },
   series: [
     {
@@ -41,8 +48,9 @@ const option = computed<EChartsOption>(() => ({
           x2: 0,
           y2: 1,
           colorStops: [
-            { offset: 0, color: '#7dd3fc' },
-            { offset: 1, color: '#2563eb' },
+            { offset: 0, color: '#79b8c7' },
+            { offset: 0.72, color: '#5d9ab2' },
+            { offset: 1, color: '#25485f' },
           ],
         },
       },

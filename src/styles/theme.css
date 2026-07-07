@@ -1,0 +1,29 @@
+:root {
+  color-scheme: light;
+  --ink-paper: #f4f0e7;
+  --ink-paper-soft: #fbf8ef;
+  --ink-paper-rice: #ede6d8;
+  --ink-mist: #dbe7e4;
+  --ink-line: rgb(45 68 82 / 14%);
+  --ink-line-strong: rgb(31 50 64 / 24%);
+  --ink-text: #1f2d35;
+  --ink-text-soft: #536873;
+  --ink-muted: #7a8b91;
+  --ink-dark: #0f1f2b;
+  --ink-blue: #25485f;
+  --ink-blue-soft: #537489;
+  --ink-cyan: #2f8f8a;
+  --ink-cyan-bright: #3bb8ad;
+  --ink-lake: #5d9ab2;
+  --ink-jade: #6aa487;
+  --ink-ochre: #b98b4a;
+  --ink-cinnabar: #b85f52;
+  --ink-shadow: 0 18px 45px rgb(42 51 51 / 12%);
+  --ink-shadow-soft: 0 10px 28px rgb(42 51 51 / 8%);
+  --ink-radius: 8px;
+  --ink-card: rgb(255 252 242 / 72%);
+  --ink-card-solid: rgb(255 252 242 / 88%);
+  --ink-card-muted: rgb(235 242 238 / 68%);
+  --ink-font-display: "Segoe UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  --ink-font-number: "DIN Alternate", "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+}
