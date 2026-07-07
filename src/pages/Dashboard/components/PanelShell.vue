@@ -1,5 +1,6 @@
 <template>
-  <section class="panel-shell">
+  <section class="panel-shell" :class="variant ? `panel-shell--${variant}` : undefined">
+    <span class="panel-shell__mist" aria-hidden="true" />
     <header class="panel-shell__header">
       <h2>{{ title }}</h2>
       <span v-if="meta">{{ meta }}</span>
@@ -14,6 +15,7 @@
 defineProps<{
   title: string
   meta?: string
+  variant?: 'focus'
 }>()
 </script>
 
@@ -34,10 +36,13 @@ defineProps<{
     var(--ink-shadow),
     inset 0 1px 0 rgb(255 255 255 / 68%);
   backdrop-filter: blur(18px);
+  transform-origin: center;
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
+    transform 360ms var(--motion-bounce),
+    box-shadow 360ms var(--motion-smooth),
+    border-color 240ms ease,
+    filter 240ms ease;
+  will-change: transform;
 }
 
 .panel-shell:hover {
@@ -45,7 +50,22 @@ defineProps<{
   box-shadow:
     0 22px 52px rgb(37 72 95 / 15%),
     inset 0 1px 0 rgb(255 255 255 / 80%);
-  transform: translateY(-1px);
+  animation: inkCardBounce 420ms var(--motion-bounce) both;
+}
+
+.panel-shell--focus {
+  z-index: 1;
+  overflow: visible;
+}
+
+.panel-shell--focus:hover {
+  z-index: 6;
+  border-color: rgb(47 143 138 / 40%);
+  box-shadow:
+    0 30px 78px rgb(37 72 95 / 22%),
+    0 0 70px rgb(47 143 138 / 16%),
+    inset 0 1px 0 rgb(255 255 255 / 86%);
+  animation: inkFocusBounce 560ms var(--motion-bounce) both;
 }
 
 .panel-shell::before {
@@ -69,8 +89,40 @@ defineProps<{
   content: '';
 }
 
+.panel-shell__mist {
+  position: absolute;
+  inset: -18% -12%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 42%, rgb(47 143 138 / 18%), transparent 26%),
+    radial-gradient(circle at 70% 58%, rgb(93 154 178 / 14%), transparent 28%),
+    linear-gradient(110deg, transparent 8%, rgb(255 255 255 / 20%) 34%, transparent 62%);
+  background-size:
+    120% 120%,
+    130% 130%,
+    220% 100%;
+  filter: blur(16px);
+  opacity: 0;
+  transform: translate3d(-4%, 3%, 0) scale(0.96);
+  transition:
+    opacity 520ms var(--motion-smooth),
+    transform 720ms var(--motion-smooth),
+    background-position 900ms var(--motion-smooth);
+}
+
+.panel-shell--focus:hover .panel-shell__mist {
+  background-position:
+    12% 18%,
+    88% 62%,
+    100% 0;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1.08);
+}
+
 .panel-shell__header {
   position: relative;
+  z-index: 1;
   display: flex;
   min-height: clamp(42px, 4.7vh, 50px);
   align-items: center;
@@ -96,8 +148,29 @@ defineProps<{
 
 .panel-shell__body {
   position: relative;
+  z-index: 1;
   min-height: 0;
   flex: 1;
   padding: clamp(10px, 0.78vw, 14px);
+}
+
+@media (width <= 1180px) {
+  .panel-shell:hover,
+  .panel-shell--focus:hover {
+    animation: inkCardBounceCompact 360ms var(--motion-bounce) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-shell,
+  .panel-shell:hover,
+  .panel-shell--focus:hover {
+    animation: none;
+    transform: none;
+  }
+
+  .panel-shell__mist {
+    display: none;
+  }
 }
 </style>

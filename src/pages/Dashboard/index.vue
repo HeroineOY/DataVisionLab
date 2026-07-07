@@ -23,7 +23,7 @@
           <MapPanel :regions="store.data.regions" />
         </PanelShell>
 
-        <PanelShell title="学习访问与实验完成趋势" meta="Weekly trend">
+        <PanelShell title="学习访问与实验完成趋势" meta="Weekly trend" variant="focus">
           <TrendChart :points="store.data.learningTrend" />
         </PanelShell>
 
@@ -244,6 +244,10 @@ onBeforeUnmount(() => {
   animation-delay: 140ms;
 }
 
+.dashboard-grid:has(.panel-shell--focus:hover) > .panel-shell:not(.panel-shell--focus) {
+  filter: saturate(0.92) brightness(0.98);
+}
+
 .dashboard-grid > :nth-child(1) {
   grid-area: map;
 }
@@ -335,6 +339,17 @@ onBeforeUnmount(() => {
   .dashboard-grid > :nth-child(n) {
     grid-area: auto;
     min-height: 330px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-metrics > *,
+  .dashboard-grid > * {
+    animation: none;
+  }
+
+  .dashboard-grid:has(.panel-shell--focus:hover) > .panel-shell:not(.panel-shell--focus) {
+    filter: none;
   }
 }
 

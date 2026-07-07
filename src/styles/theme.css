@@ -26,4 +26,66 @@
   --ink-card-muted: rgb(235 242 238 / 68%);
   --ink-font-display: "Segoe UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
   --ink-font-number: "DIN Alternate", "Roboto Mono", "SFMono-Regular", Consolas, monospace;
+  --motion-bounce: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes inkCardBounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  55% {
+    transform: translateY(-5px) scale(1.035);
+  }
+
+  78% {
+    transform: translateY(-3px) scale(1.014);
+  }
+
+  100% {
+    transform: translateY(-4px) scale(1.024);
+  }
+}
+
+@keyframes inkCardBounceCompact {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    transform: translateY(-2px) scale(1.012);
+  }
+}
+
+@keyframes inkFocusBounce {
+  0% {
+    transform: translateY(0) scale(1);
+    filter: saturate(1);
+  }
+
+  48% {
+    transform: translateY(-8px) scale(1.064);
+    filter: saturate(1.04);
+  }
+
+  72% {
+    transform: translateY(-5px) scale(1.035);
+  }
+
+  100% {
+    transform: translateY(-6px) scale(1.052);
+    filter: saturate(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }

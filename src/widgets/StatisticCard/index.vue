@@ -47,16 +47,21 @@ const displayValue = computed(() => {
     var(--ink-shadow-soft),
     inset 0 1px 0 rgb(255 255 255 / 78%);
   backdrop-filter: blur(14px);
+  transform-origin: center;
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+    transform 360ms var(--motion-bounce),
+    border-color 220ms ease,
+    box-shadow 260ms var(--motion-smooth),
+    filter 220ms ease;
+  will-change: transform;
 }
 
 .metric-card:hover {
   border-color: rgb(47 143 138 / 28%);
-  box-shadow: 0 16px 36px rgb(47 72 82 / 14%);
-  transform: translateY(-2px);
+  box-shadow:
+    0 18px 42px rgb(47 72 82 / 15%),
+    0 0 32px rgb(47 143 138 / 10%);
+  animation: inkCardBounce 420ms var(--motion-bounce) both;
 }
 
 .metric-card::before {
@@ -117,5 +122,19 @@ const displayValue = computed(() => {
   color: var(--ink-blue-soft);
   font-size: 13px;
   font-weight: 700;
+}
+
+@media (width <= 1180px) {
+  .metric-card:hover {
+    animation: inkCardBounceCompact 360ms var(--motion-bounce) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metric-card,
+  .metric-card:hover {
+    animation: none;
+    transform: none;
+  }
 }
 </style>
