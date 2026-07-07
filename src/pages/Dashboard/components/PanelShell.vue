@@ -65,7 +65,7 @@ defineProps<{
     0 30px 78px rgb(37 72 95 / 22%),
     0 0 70px rgb(47 143 138 / 16%),
     inset 0 1px 0 rgb(255 255 255 / 86%);
-  animation: inkFocusBounce 560ms var(--motion-bounce) both;
+  animation: inkFocusBounce 620ms var(--motion-bounce) both;
 }
 
 .panel-shell::before {

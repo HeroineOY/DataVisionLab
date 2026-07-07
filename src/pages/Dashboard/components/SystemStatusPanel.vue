@@ -38,7 +38,7 @@ defineProps<{
   height: 100%;
   min-height: 0;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .system-status__grid {
@@ -49,7 +49,7 @@ defineProps<{
 
 .system-status__grid div {
   min-width: 0;
-  padding: 10px;
+  padding: 8px 9px;
   border: 1px solid var(--ink-line);
   border-radius: 8px;
   background: rgb(255 252 242 / 58%);
@@ -65,7 +65,7 @@ defineProps<{
 
 .system-status__grid strong {
   display: block;
-  margin-top: 6px;
+  margin-top: 4px;
   color: var(--ink-dark);
   font-family: var(--ink-font-number);
   font-size: clamp(18px, 1.15vw, 21px);
@@ -75,8 +75,10 @@ defineProps<{
 .system-status__logs {
   display: grid;
   align-content: start;
-  gap: 8px;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 6px;
   min-height: 0;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -87,11 +89,12 @@ defineProps<{
   grid-template-columns: 72px 1fr;
   gap: 10px;
   min-width: 0;
-  padding: 9px 10px;
+  align-items: center;
+  padding: 7px 9px;
   border-radius: 8px;
   background: rgb(255 252 242 / 62%);
   color: var(--ink-dark);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .system-status__logs strong {

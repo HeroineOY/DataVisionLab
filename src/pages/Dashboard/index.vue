@@ -19,12 +19,20 @@
       </div>
 
       <div class="dashboard-grid">
-        <PanelShell title="区域学习热力" meta="Regional distribution">
-          <MapPanel :regions="store.data.regions" />
+        <PanelShell title="学习访问趋势" meta="Trend">
+          <TrendChart :points="store.data.learningTrend" />
         </PanelShell>
 
-        <PanelShell title="学习访问与实验完成趋势" meta="Weekly trend" variant="focus">
-          <TrendChart :points="store.data.learningTrend" />
+        <PanelShell title="中心态势星系" meta="Galaxy overview" variant="focus">
+          <GalaxyCorePanel
+            :regions="store.data.regions"
+            :chart-usage="store.data.chartUsage"
+            :health-score="store.data.health.score"
+          />
+        </PanelShell>
+
+        <PanelShell title="热门学习任务排行" meta="Top tasks">
+          <RankingBoard :items="store.data.ranking" />
         </PanelShell>
 
         <PanelShell title="图表类型占比" meta="Chart usage">
@@ -35,15 +43,15 @@
           <BarChartPanel :items="store.data.courseDistribution" />
         </PanelShell>
 
-        <PanelShell title="热门学习任务排行" meta="Top tasks">
-          <RankingBoard :items="store.data.ranking" />
-        </PanelShell>
-
         <PanelShell title="系统运行状态" meta="Quality & logs">
           <div class="dashboard-health">
             <GaugePanel :score="store.data.health.score" />
             <SystemStatusPanel :health="store.data.health" :logs="store.data.logs" />
           </div>
+        </PanelShell>
+
+        <PanelShell title="区域学习热力" meta="Regional distribution">
+          <MapPanel :regions="store.data.regions" />
         </PanelShell>
       </div>
     </section>
@@ -57,6 +65,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useDashboardStore } from '@/app/stores/dashboardStore'
 import BarChartPanel from '@/widgets/BarChartPanel/index.vue'
 import DonutChart from '@/widgets/DonutChart/index.vue'
+import GalaxyCorePanel from '@/widgets/GalaxyCorePanel/index.vue'
 import GaugePanel from '@/widgets/GaugePanel/index.vue'
 import MapPanel from '@/widgets/MapPanel/index.vue'
 import RankingBoard from '@/widgets/RankingBoard/index.vue'
@@ -224,9 +233,10 @@ onBeforeUnmount(() => {
   display: grid;
   min-height: 0;
   grid-template:
-    "map trend donut" minmax(0, 1fr)
-    "health bar ranking" minmax(0, 1fr)
-    / minmax(300px, 0.92fr) minmax(520px, 1.56fr) minmax(340px, 1.04fr);
+    "trend galaxy ranking" minmax(0, 1fr)
+    "donut galaxy bar" minmax(0, 1fr)
+    "health galaxy map" minmax(0, 1fr)
+    / minmax(300px, 0.82fr) minmax(560px, 1.62fr) minmax(320px, 0.9fr);
   gap: clamp(12px, 1vw, 16px);
 }
 
@@ -249,27 +259,31 @@ onBeforeUnmount(() => {
 }
 
 .dashboard-grid > :nth-child(1) {
-  grid-area: map;
-}
-
-.dashboard-grid > :nth-child(2) {
   grid-area: trend;
 }
 
+.dashboard-grid > :nth-child(2) {
+  grid-area: galaxy;
+}
+
 .dashboard-grid > :nth-child(3) {
-  grid-area: donut;
+  grid-area: ranking;
 }
 
 .dashboard-grid > :nth-child(4) {
-  grid-area: bar;
+  grid-area: donut;
 }
 
 .dashboard-grid > :nth-child(5) {
-  grid-area: ranking;
+  grid-area: bar;
 }
 
 .dashboard-grid > :nth-child(6) {
   grid-area: health;
+}
+
+.dashboard-grid > :nth-child(7) {
+  grid-area: map;
 }
 
 .dashboard-health {

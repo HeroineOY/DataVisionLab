@@ -26,7 +26,8 @@ defineProps<{
 <style scoped>
 .ranking-board {
   display: grid;
-  gap: 14px;
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: clamp(7px, 0.75vh, 10px);
   height: 100%;
   margin: 0;
   padding: 0;
@@ -35,15 +36,16 @@ defineProps<{
 
 .ranking-board__item {
   display: grid;
-  grid-template-columns: 34px 1fr;
+  min-height: 0;
+  grid-template-columns: 32px 1fr;
   align-items: center;
   gap: 12px;
 }
 
 .ranking-board__index {
   display: grid;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   place-items: center;
   border: 1px solid var(--ink-line-strong);
   border-radius: 8px;
@@ -62,7 +64,7 @@ defineProps<{
   justify-content: space-between;
   gap: 12px;
   color: var(--ink-dark);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .ranking-board__line strong {
@@ -79,7 +81,7 @@ defineProps<{
 
 .ranking-board__track {
   height: 7px;
-  margin-top: 8px;
+  margin-top: 6px;
   overflow: hidden;
   border-radius: 99px;
   background: rgb(31 50 64 / 10%);

@@ -65,16 +65,16 @@
   }
 
   48% {
-    transform: translateY(-8px) scale(1.064);
+    transform: translateY(-7px) scale(1.052);
     filter: saturate(1.04);
   }
 
   72% {
-    transform: translateY(-5px) scale(1.035);
+    transform: translateY(-5px) scale(1.028);
   }
 
   100% {
-    transform: translateY(-6px) scale(1.052);
+    transform: translateY(-5px) scale(1.04);
     filter: saturate(1.03);
   }
 }
