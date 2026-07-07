@@ -33,20 +33,35 @@ const displayValue = computed(() => {
 .metric-card {
   position: relative;
   display: flex;
-  min-height: 104px;
+  min-height: 0;
   justify-content: space-between;
   overflow: hidden;
-  padding: 18px;
-  border: 1px solid rgb(255 255 255 / 10%);
+  padding: clamp(14px, 1vw, 18px);
+  border: 1px solid rgb(125 211 252 / 14%);
   border-radius: 8px;
-  background: linear-gradient(145deg, rgb(255 255 255 / 9%), rgb(255 255 255 / 3%));
-  box-shadow: 0 16px 38px rgb(0 0 0 / 20%);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 11%), rgb(255 255 255 / 3%)),
+    rgb(12 24 42 / 82%);
+  box-shadow:
+    0 16px 34px rgb(0 0 0 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
 .metric-card::before {
   position: absolute;
   inset: 0 auto 0 0;
-  width: 4px;
+  width: 3px;
+  content: '';
+}
+
+.metric-card::after {
+  position: absolute;
+  top: -22px;
+  right: -18px;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: rgb(125 211 252 / 10%);
   content: '';
 }
 
@@ -67,14 +82,14 @@ const displayValue = computed(() => {
 }
 
 .metric-card__label {
-  margin: 0 0 10px;
+  margin: 0 0 clamp(8px, 0.7vh, 11px);
   color: #a9bad6;
   font-size: 14px;
 }
 
 .metric-card__value {
   color: #f8fbff;
-  font-size: 30px;
+  font-size: clamp(24px, 1.55vw, 31px);
   font-weight: 700;
   line-height: 1;
 }

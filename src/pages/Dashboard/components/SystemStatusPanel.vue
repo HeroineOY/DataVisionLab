@@ -36,40 +36,45 @@ defineProps<{
 .system-status {
   display: grid;
   height: 100%;
-  grid-template-rows: auto 1fr;
-  gap: 14px;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
 }
 
 .system-status__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .system-status__grid div {
-  padding: 12px;
-  border: 1px solid rgb(255 255 255 / 9%);
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgb(125 211 252 / 12%);
   border-radius: 8px;
-  background: rgb(255 255 255 / 5%);
+  background: rgb(255 255 255 / 6%);
 }
 
 .system-status__grid span {
   display: block;
+  overflow-wrap: anywhere;
   color: #a9bad6;
   font-size: 12px;
 }
 
 .system-status__grid strong {
   display: block;
-  margin-top: 7px;
+  margin-top: 6px;
   color: #f8fbff;
-  font-size: 20px;
+  font-size: clamp(18px, 1.15vw, 21px);
+  line-height: 1.1;
 }
 
 .system-status__logs {
   display: grid;
   align-content: start;
-  gap: 9px;
+  gap: 8px;
+  min-height: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -79,11 +84,18 @@ defineProps<{
   display: grid;
   grid-template-columns: 72px 1fr;
   gap: 10px;
-  padding: 10px;
+  min-width: 0;
+  padding: 9px 10px;
   border-radius: 8px;
-  background: rgb(255 255 255 / 5%);
+  background: rgb(255 255 255 / 6%);
   color: #d9e7ff;
   font-size: 13px;
+}
+
+.system-status__logs strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .system-status__logs span {

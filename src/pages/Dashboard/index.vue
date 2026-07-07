@@ -86,29 +86,52 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .dashboard-page {
+  position: relative;
   min-height: 100vh;
-  padding: 22px;
+  padding: clamp(14px, 1vw, 20px);
+  overflow: hidden;
   background:
-    radial-gradient(circle at 18% 12%, rgb(45 212 191 / 16%), transparent 28%),
-    radial-gradient(circle at 78% 8%, rgb(245 158 11 / 14%), transparent 24%),
+    linear-gradient(rgb(96 165 250 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(96 165 250 / 4%) 1px, transparent 1px),
+    radial-gradient(circle at 18% 12%, rgb(45 212 191 / 18%), transparent 26%),
+    radial-gradient(circle at 78% 8%, rgb(245 158 11 / 12%), transparent 24%),
+    radial-gradient(circle at 50% 92%, rgb(96 165 250 / 10%), transparent 32%),
     linear-gradient(135deg, #07111f 0%, #0c1728 46%, #111827 100%);
+  background-size:
+    32px 32px,
+    32px 32px,
+    auto,
+    auto,
+    auto,
+    auto;
   color: #f8fbff;
 }
 
+.dashboard-page::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(255 255 255 / 5%), transparent 18%, rgb(0 0 0 / 16%));
+  content: '';
+}
+
 .dashboard-header {
+  position: relative;
   display: flex;
-  min-height: 76px;
+  min-height: clamp(58px, 6.7vh, 74px);
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  margin-bottom: 18px;
-  padding: 0 8px;
+  margin-bottom: clamp(10px, 1vh, 14px);
+  padding: 0 4px;
 }
 
 .dashboard-header h1 {
   margin: 6px 0 0;
-  font-size: 32px;
+  color: #f8fbff;
+  font-size: clamp(25px, 1.7vw, 34px);
   font-weight: 800;
+  text-shadow: 0 0 28px rgb(45 212 191 / 28%);
 }
 
 .dashboard-header__eyebrow {
@@ -120,9 +143,13 @@ onBeforeUnmount(() => {
 
 .dashboard-header__status {
   display: grid;
-  min-width: 260px;
+  min-width: 240px;
   justify-items: end;
-  gap: 8px;
+  gap: 6px;
+  padding: 10px 14px;
+  border: 1px solid rgb(141 220 255 / 18%);
+  border-radius: 8px;
+  background: rgb(9 19 34 / 58%);
 }
 
 .dashboard-header__status span {
@@ -136,36 +163,60 @@ onBeforeUnmount(() => {
 }
 
 .dashboard-content {
+  position: relative;
   display: grid;
-  gap: 16px;
+  height: calc(100vh - clamp(58px, 6.7vh, 74px) - clamp(10px, 1vh, 14px) - clamp(28px, 2vw, 40px));
+  grid-template-rows: clamp(84px, 10vh, 108px) minmax(0, 1fr);
+  gap: clamp(12px, 1vw, 16px);
 }
 
 .dashboard-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(180px, 1fr));
-  gap: 16px;
+  gap: clamp(12px, 1vw, 16px);
+  min-height: 0;
 }
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 0.86fr) minmax(440px, 1.45fr) minmax(300px, 0.95fr);
-  grid-template-rows: 330px 340px;
-  gap: 16px;
+  min-height: 0;
+  grid-template:
+    "map trend donut" minmax(0, 1fr)
+    "health bar ranking" minmax(0, 1fr)
+    / minmax(300px, 0.92fr) minmax(520px, 1.56fr) minmax(340px, 1.04fr);
+  gap: clamp(12px, 1vw, 16px);
+}
+
+.dashboard-grid > :nth-child(1) {
+  grid-area: map;
 }
 
 .dashboard-grid > :nth-child(2) {
-  grid-column: 2;
+  grid-area: trend;
+}
+
+.dashboard-grid > :nth-child(3) {
+  grid-area: donut;
 }
 
 .dashboard-grid > :nth-child(4) {
-  grid-column: 2;
+  grid-area: bar;
+}
+
+.dashboard-grid > :nth-child(5) {
+  grid-area: ranking;
+}
+
+.dashboard-grid > :nth-child(6) {
+  grid-area: health;
 }
 
 .dashboard-health {
   display: grid;
   height: 100%;
-  grid-template-columns: 34% 1fr;
-  gap: 14px;
+  min-height: 0;
+  grid-template-columns: minmax(110px, 0.34fr) minmax(0, 1fr);
+  gap: 12px;
 }
 
 .dashboard-loading {
@@ -179,14 +230,23 @@ onBeforeUnmount(() => {
 }
 
 @media (width <= 1180px) {
+  .dashboard-page {
+    overflow: auto;
+  }
+
+  .dashboard-content {
+    height: auto;
+    grid-template-rows: auto auto;
+  }
+
   .dashboard-metrics,
   .dashboard-grid {
+    grid-template: none;
     grid-template-columns: repeat(2, minmax(260px, 1fr));
-    grid-template-rows: none;
   }
 
   .dashboard-grid > :nth-child(n) {
-    grid-column: auto;
+    grid-area: auto;
     min-height: 330px;
   }
 }
